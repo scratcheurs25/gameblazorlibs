@@ -1,0 +1,21 @@
+﻿<style>
+    .blueb {
+        background-color: blue;
+    }
+</style>
+<button @onclick="HandleClick" class="blueb">@txt</button>
+
+@code {
+    [Parameter]
+    public string txt { get; set; } = "hello word";
+        [Parameter]
+        public EventCallback OnClick { get; set; }
+
+        private async Task HandleClick()
+        {
+            if (OnClick.HasDelegate)
+            {
+                await OnClick.InvokeAsync();
+            }
+        }
+}
